@@ -19,7 +19,7 @@ data = pd.read_csv('diabetes_dataset.csv')
 # Criando X and y par ao algorítmo de aprendizagem de máquina.\
 print(' - Criando X e y para o algoritmo de aprendizagem a partir do arquivo diabetes_dataset')
 # Caso queira modificar as colunas consideradas basta algera o array a seguir.
-feature_cols = ['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 
+feature_cols = ['Pregnancies', 'Glucose', 'BloodPressure',
                 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age']
 
 # Cleaning NaN cells
