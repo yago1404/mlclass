@@ -23,13 +23,16 @@ feature_cols = ['Pregnancies', 'Glucose', 'BloodPressure',
                 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age']
 
 # Cleaning NaN cells
+# 'for i in feature_cols:
+#     position = 0
+#     print(data[i].values)
+#     for j in data[i].values:
+#         if math.isnan(j):
+#             data[i][position] = 0
+#         position = position + 1'
+        
 for i in feature_cols:
-    position = 0
-    print(data[i].values)
-    for j in data[i].values:
-        if math.isnan(j):
-            data[i][position] = 0
-        position = position + 1
+    data[i] = data[i].fillna(data[i].mode()[0])
 
 X = data[feature_cols]
 y = data.Outcome
