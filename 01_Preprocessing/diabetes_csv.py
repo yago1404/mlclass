@@ -8,7 +8,7 @@ no servidor.
 
 @author: Aydano Machado <aydano.machado@gmail.com>
 """
-
+import math
 import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
 import requests
@@ -21,6 +21,16 @@ print(' - Criando X e y para o algoritmo de aprendizagem a partir do arquivo dia
 # Caso queira modificar as colunas consideradas basta algera o array a seguir.
 feature_cols = ['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 
                 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age']
+
+# Cleaning NaN cells
+for i in feature_cols:
+    position = 0
+    print(data[i].values)
+    for j in data[i].values:
+        if math.isnan(j):
+            data[i][position] = 0
+        position = position + 1
+
 X = data[feature_cols]
 y = data.Outcome
 
@@ -39,7 +49,7 @@ y_pred = neigh.predict(data_app)
 URL = "https://aydanomachado.com/mlclass/01_Preprocessing.php"
 
 #TODO Substituir pela sua chave aqui
-DEV_KEY = "COLOCAR_SUA_KEY_AQUI"
+DEV_KEY = "Equipe Bayes"
 
 # json para ser enviado para o servidor
 data = {'dev_key':DEV_KEY,
