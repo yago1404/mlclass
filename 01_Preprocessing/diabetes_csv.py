@@ -10,7 +10,7 @@ no servidor.
 """
 
 """
-(1) Substituindo os NaN por 0 => 55%
+(1) Substituindo os NaN por valores maximos e minimos das colunas => 55%
 
 (2) 1 + Removendo SkinThickness => 57%
 
