@@ -8,8 +8,25 @@ no servidor.
 
 @author: Aydano Machado <aydano.machado@gmail.com>
 """
+
+"""
+(1) Substituindo os NaN por 0 => 55%
+
+(2) 1 + Removendo SkinThickness => 57%
+
+(3) Removendo SkinThickness + substituindo NaN pela moda => 57%
+
+(4) Removendo SkinThickness + substituindo NaN pela media => 58%
+
+(5) Removendo SkinThickness + normalizando DiabetesPedigreeFunction + substituindo NaN pela moda
+ => 58%
+
+(6) Removendo SkinThickness + normalizando DiabetesPedigreeFunction e Glucose e Insulina + utilizando a moda => 55%
+"""
+
 import math
 import pandas as pd
+import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 import requests
 
@@ -22,13 +39,18 @@ print(' - Criando X e y para o algoritmo de aprendizagem a partir do arquivo dia
 feature_cols = ['Pregnancies', 'Glucose', 'BloodPressure',
                 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age']
 
+medias = []
+for i in range(len(feature_cols)):
+    medias.append(np.nanmean(data[feature_cols[i]]))
+
 # Cleaning NaN cells
 for i in feature_cols:
     position = 0
-    print(data[i].values)
     for j in data[i].values:
         if math.isnan(j):
-            data[i][position] = 0
+            data[i][position] = medias[feature_cols.index(i)]
+        if i == "DiabetesPedigreeFunction":
+            data[i][position] = round(data[i][position], 3)
         position = position + 1
 
 X = data[feature_cols]
@@ -48,7 +70,7 @@ y_pred = neigh.predict(data_app)
 # Enviando previsões realizadas com o modelo para o servidor
 URL = "https://aydanomachado.com/mlclass/01_Preprocessing.php"
 
-#TODO Substituir pela sua chave aqui
+# #TODO Substituir pela sua chave aqui
 DEV_KEY = "Equipe Bayes"
 
 # json para ser enviado para o servidor
