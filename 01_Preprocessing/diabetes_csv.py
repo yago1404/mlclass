@@ -22,6 +22,8 @@ no servidor.
  => 58%
 
 (6) Removendo SkinThickness + normalizando DiabetesPedigreeFunction e Glucose e Insulina + utilizando a moda => 55%
+
+(7) Removendo colunas de alta corelacao e normalizando os dados pela media => 60%
 """
 
 import math
@@ -36,8 +38,7 @@ data = pd.read_csv('diabetes_dataset.csv')
 # Criando X and y par ao algorítmo de aprendizagem de máquina.\
 print(' - Criando X e y para o algoritmo de aprendizagem a partir do arquivo diabetes_dataset')
 # Caso queira modificar as colunas consideradas basta algera o array a seguir.
-feature_cols = ['Pregnancies', 'Glucose', 'BloodPressure',
-                'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age']
+feature_cols = ['Pregnancies', 'Glucose', 'BMI', 'DiabetesPedigreeFunction', 'Age']
 
 medias = []
 for i in range(len(feature_cols)):
