@@ -23,7 +23,7 @@ no servidor.
 
 (6) Removendo SkinThickness + normalizando DiabetesPedigreeFunction e Glucose e Insulina + utilizando a moda => 55%
 
-(7) Removendo colunas de alta corelacao e normalizando os dados pela media => 60%
+(7) Removendo colunas de alta corelacao e muitos dados faltantes + normalizando os dados pela media => 60%
 """
 
 import math
